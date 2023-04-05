@@ -1,5 +1,6 @@
 #Solar System Visualizer
 import utils
+import random
 import math
 import pygame
 
@@ -8,14 +9,14 @@ pygame.init()
 clock = pygame.time.Clock()
 FPS = 60
 
-dimensions = (800, 800)
+dimensions = (900, 900)
 screen = pygame.display.set_mode(dimensions)
 pygame.display.set_caption("SOLAR SYSTEM")
 
 # Player Position
 user_pos = [-dimensions[0]/2, -dimensions[1]/2]
 zoom = 1
-ZOOM_SPEED = 0.1
+ZOOM_SPEED = 0.025
 USER_SPEED = 10
 
 def update_user_pos():
@@ -51,29 +52,42 @@ def user_main():
 
 # Game Objects
 class Planet:
-    def __init__(self, pos: list, size: int) -> None:
-        self.pos = pos
+    def __init__(self, size: float, dist) -> None:
+        self.dist = dist
+        self.pos = [0, 0]
         self.rel_pos = [0, 0]
         self.size = size
         self.rel_size = size
+        self.angle = math.radians(random.randint(0, 360))
     
     def draw(self):
         pygame.draw.circle(screen, utils.WHITE, self.rel_pos, self.rel_size)
 
     def main(self):
+        # Update Position
         global zoom
+
+        self.pos[0] = math.cos(self.angle) * self.dist
+        self.pos[1] = math.sin(self.angle) * self.dist
+
+        self.angle += math.radians((2 * math.pi)/180)
+
         for i in range(2):
             self.rel_pos[i] = (self.pos[i] - user_pos[i]) * zoom
 
         self.rel_size = self.size * zoom
 
+        # Draw
         self.draw()
 
 
 # --- Planets
-mercury = Planet([0, 0], 32)
+sun = Planet(100, 0)
+mercury = Planet(1.4, 200)
+venus = Planet(2.8, 400)
+earth = Planet(5.6, 600)
 
-planets = [mercury]
+planets = [sun, mercury, venus, earth]
 
 # Game Loop
 running = 1
