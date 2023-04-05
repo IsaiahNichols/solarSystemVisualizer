@@ -52,10 +52,11 @@ def user_main():
 
 # Game Objects
 class Planet:
-    def __init__(self, size: float, dist) -> None:
+    def __init__(self, size: float, dist, speed) -> None:
         self.dist = dist
         self.pos = [0, 0]
         self.rel_pos = [0, 0]
+        self.speed = speed
         self.size = size
         self.rel_size = size
         self.angle = math.radians(random.randint(0, 360))
@@ -70,7 +71,7 @@ class Planet:
         self.pos[0] = math.cos(self.angle) * self.dist
         self.pos[1] = math.sin(self.angle) * self.dist
 
-        self.angle += math.radians((2 * math.pi)/180)
+        self.angle += math.radians((2 * math.pi)/180) * self.speed
 
         for i in range(2):
             self.rel_pos[i] = (self.pos[i] - user_pos[i]) * zoom
@@ -82,12 +83,14 @@ class Planet:
 
 
 # --- Planets
-sun = Planet(100, 0)
-mercury = Planet(1.4, 200)
-venus = Planet(2.8, 400)
-earth = Planet(5.6, 600)
+sun = Planet(100, 0, 0)
+mercury = Planet(1.5, 200, 16)
+venus = Planet(4, 300, 14)
+earth = Planet(6, 400, 12)
+mars = Planet(3, 500, 10)
+jupiter = Planet(12, 600, 8)
 
-planets = [sun, mercury, venus, earth]
+planets = [sun, mercury, venus, earth, mars, jupiter]
 
 # Game Loop
 running = 1
