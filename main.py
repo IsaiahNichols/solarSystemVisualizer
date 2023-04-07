@@ -52,7 +52,7 @@ def user_main():
 
 # Game Objects
 class Planet:
-    def __init__(self, size: float, dist, speed) -> None:
+    def __init__(self, size: float, dist, speed, color: tuple) -> None:
         self.dist = dist
         self.pos = [0, 0]
         self.rel_pos = [0, 0]
@@ -60,9 +60,10 @@ class Planet:
         self.size = size
         self.rel_size = size
         self.angle = math.radians(random.randint(0, 360))
+        self.color = color
     
     def draw(self):
-        pygame.draw.circle(screen, utils.WHITE, self.rel_pos, self.rel_size)
+        pygame.draw.circle(screen, self.color, self.rel_pos, self.rel_size)
 
     def main(self):
         # Update Position
@@ -82,17 +83,17 @@ class Planet:
         self.draw()
 
 
-# --- Planets
-sun = Planet(100, 0, 0)
-mercury = Planet(1.5, 200, 16)
-venus = Planet(4, 300, 14)
-earth = Planet(6, 400, 12)
-mars = Planet(3, 500, 10)
-jupiter = Planet(12, 600, 8)
-saturn = Planet(12, 700, 8)
-neptune = Planet(12, 800, 8)
-uranus = Planet(12, 900, 8)
-pluto = Planet(12, 1000, 8)
+# --- Sun & Planets
+sun = Planet(100, 0, 0, (255, 255, 0))
+mercury = Planet(1.5, 200, 16, (155, 155, 155))
+venus = Planet(4, 300, 14, (155, 155, 0))
+earth = Planet(6, 400, 10, (0, 255, 0))
+mars = Planet(3, 500, 8, (255, 0, 0))
+jupiter = Planet(12, 600, 6, (255, 155, 155))
+saturn = Planet(12, 700, 5, (100, 100, 20))
+neptune = Planet(10, 800, 4, (0, 0, 255))
+uranus = Planet(9, 900, 4, (0, 0, 100))
+pluto = Planet(4, 1000, 1, (0, 0, 50))
 
 planets = [sun, mercury, venus, earth, mars, jupiter, saturn, neptune, uranus, pluto]
 
