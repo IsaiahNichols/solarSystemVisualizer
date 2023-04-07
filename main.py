@@ -89,8 +89,12 @@ venus = Planet(4, 300, 14)
 earth = Planet(6, 400, 12)
 mars = Planet(3, 500, 10)
 jupiter = Planet(12, 600, 8)
+saturn = Planet(12, 700, 8)
+neptune = Planet(12, 800, 8)
+uranus = Planet(12, 900, 8)
+pluto = Planet(12, 1000, 8)
 
-planets = [sun, mercury, venus, earth, mars, jupiter]
+planets = [sun, mercury, venus, earth, mars, jupiter, saturn, neptune, uranus, pluto]
 
 # Game Loop
 running = 1
